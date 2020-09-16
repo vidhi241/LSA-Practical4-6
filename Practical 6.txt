@@ -1,0 +1,53 @@
+PRACTICAL NO. 6
+Aim:Configure DHCP Server, configure DHCP (Dynamic Host Configuration Protocol) Server, Configure NFS Server to share directories on your Network , configure NFS Clients (Ubuntu and windows client OS)
+
+Theory:
+NFS (Network File System) is basically developed for sharing of files and foldersbetween Linux/Unix systems by Sun Microsystems in 1980. It allows you to mount your local file systems over a network and remote hosts to interact with them as they are mounted locally on the same system. With the help of NFS, we can set up file sharing between Unix to Linux system and Linux to Unix system.
+
+Benefits of NFS
+1. NFS allows local access to remote files.
+2. It uses standard client/server architecture for file sharing between all *nix based machines.
+3. With NFS it is not necessary that both machines run on the same OS.
+4. With the help of NFS we can configure centralized storage solutions.
+5. Users get their data irrespective of physical location.
+6. No manual refresh needed for new files.
+7. Newer version of NFS also supports acl, pseudo root mounts.
+8. Can be secured with Firewalls and Kerberos.
+
+Important Files for NFS Configuration
+/etc/exports : Its a main configuration file of NFS, all exported files and directories are defined in this file at the NFS Server end.
+/etc/fstab : To mount a NFS directory on your system across the reboots, we need to make an entry in /etc/fstab.
+/etc/sysconfig/nfs : Configuration file of NFS to control on which port rpc and other services are listening.
+
+Code:
+Install NFS server:
+sudo apt-get  -y install kernel-server
+sudo apt-get  -y install nfs-kernel-server
+
+cat/etc/exports
+
+mkdir demo_dir
+vi a.txt
+pwd
+
+ls a.txt
+
+mv a.txt demo_dir
+
+sudo vi /etc/exports
+
+cat /etc/exports
+
+/home/tycs/demo_dir 127.0.0.1(rw)
+
+sudo exportfs -ra
+
+sudo apt-get  -y install nfs-common
+
+sudo mkdir /home/tycs_directory
+
+sudo mount -t nfs 127.0.0.1:/home/tycs/demo_dir /home/tycs_directory
+
+cd /home/tycs_directory
+ls
+
